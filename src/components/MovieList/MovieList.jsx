@@ -1,6 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Img, List } from './MovieList.styled';
 
+
+const baseUrl = 'https://image.tmdb.org/t/p/w500/';
+
+const DEFAULT_MOVIE_POSTER =
+  'https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie.jpg';
+
+
 export const MovieList = ({ movies }) => {
   const location = useLocation();
 
@@ -16,10 +23,12 @@ export const MovieList = ({ movies }) => {
               />
             ) : (
               <Img
-                src={
-                  'https://via.placeholder.com/400x600.png?text=Poster+Not+Available'
-                }
-                alt={movie.original_title}
+             src={
+                movie.poster_path
+                  ? baseUrl + movie.poster_path
+                  : DEFAULT_MOVIE_POSTER
+              }
+              alt={movie.title}
               />
             )}
             <h3>{movie.title}</h3>
